@@ -29,16 +29,9 @@ const loginget=(req,res) => {
     res.render('login')
 }
 const loginpost=async(req,res) => {
-    let usercheck=await user.findOne({username})
-    if(!usercheck){
-        res.send('user not found')
-    }
-    else if(usercheck.password !== req.body.password){
-        res.send('password incorrect')
-    }
-    else{
-        res.render('index')
-    }
+    // console.log(req.body);
+    // res.render('index')
+    res.send('welcome')
 }
 
 module.exports ={home,login,singup,session,loginget,loginpost}

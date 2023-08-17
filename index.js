@@ -4,15 +4,18 @@ const server = require('./config/db');
 const users= require('./routes/route')
 const session = require('express-session');
 const passport = require('passport');
+const localpassport = require('./middleware/middelware.login');
+localpassport(passport)
 const app = express();
 
-app.use(session({secret:'secret'}));
 app.set("view engine","ejs")
 app.use(express.static(__dirname+'/public'));
 app.set('views',__dirname+'/views');
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
-
+app.use(session({secret:'secret'}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(users)
 
 
