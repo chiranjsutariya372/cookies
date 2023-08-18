@@ -1,10 +1,11 @@
 const oauth= require('passport-google-oauth20').Strategy;
 
 const googleAuth=(passport)=>{
-    passport.use(new oauth(
+    passport.use(
+        new oauth(
         {
-        clientId: '619023602807-3ik2uf8jjgil4ikuji16pp0nes3lbj1k.apps.googleusercontent.com',
-        clientIdSecret: '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',
+        clientID: '619023602807-g52k265m3ce1nuivpq740ufaqgsc1028.apps.googleusercontent.com',
+        clientSecret: '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',
         callbackURL: 'http://localhost:8080/auth/google/callback'
         },
     
