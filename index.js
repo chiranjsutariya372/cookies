@@ -5,7 +5,9 @@ const users= require('./routes/route')
 const session = require('express-session');
 const passport = require('passport');
 const localpassport = require('./middleware/middelware.login');
+const googleAuth = require('./middleware/Oauth');
 localpassport(passport)
+googleAuth(passport)
 const app = express();
 
 app.set("view engine","ejs")

@@ -1,5 +1,9 @@
+const passport = require("passport")
 const user = require("../model/shcema")
 
+const homepage=(req,res) => {
+    res.render('index')
+}
 const home=(req,res)=>{
     res.render('index')
 }
@@ -33,5 +37,4 @@ const loginpost=async(req,res) => {
     // res.render('index')
     res.send('welcome')
 }
-
-module.exports ={home,login,singup,session,loginget,loginpost}
+module.exports ={home,login,singup,session,loginget,loginpost,homepage}

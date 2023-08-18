@@ -3,7 +3,7 @@ const user = require('../model/shcema')
 const passportlocal=require('passport-local').Strategy
 const localpassport = (passport) => {
     passport.use(new passportlocal(async (username, password, done) => {
-        let finduser=await user.findOne(username)
+        let finduser=await user.findOne({username})
 
         if(!finduser) {return done(null,false)}
 
