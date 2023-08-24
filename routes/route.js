@@ -1,5 +1,5 @@
 const express = require('express');
-const { home, login, singup, session, loginget, loginpost, homepage } = require('../controllers/controllers');
+const { home, login, singup, session, loginget, loginpost, homepage, getblog } = require('../controllers/controllers');
 const auth = require('../middleware/middleware');
 const passport = require('passport');
 const users = express();
@@ -11,6 +11,7 @@ users.get('/singup',singup)
 users.post('/login',login)
 users.get('/loginpage',loginget)
 users.post('/loginpost',passport.authenticate('local'),loginpost)
+users.get('/blog',getblog)
 
 // GoogleAuth
 

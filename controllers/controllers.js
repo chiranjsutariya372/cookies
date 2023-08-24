@@ -35,6 +35,10 @@ const loginget=(req,res) => {
 const loginpost=async(req,res) => {
     // console.log(req.body);
     // res.render('index')
-    res.send('welcome')
+    res.render('blog')
 }
-module.exports ={home,login,singup,session,loginget,loginpost,homepage}
+const getblog=(req, res)=>{
+    res.render('blog')
+}
+
+module.exports ={home,login,singup,session,loginget,loginpost,homepage,getblog}

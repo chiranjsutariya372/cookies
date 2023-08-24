@@ -4,17 +4,11 @@ const bcrypt= require('bcryptjs');
 let usershcema=mongoose.Schema({
     username:String,
     email:String,
-    password:String
+    password:String,
+    blog:[]
 })
 
-// UserShcema=pre('save', async function(next){
-//     if(this.isModified('password')){
-//         this.password=await bcrypt.hash(this.password,12)
-//     }
-//     next();
-// })
 
-
-let user=mongoose.model('cookie',usershcema)
+let user=mongoose.model('blog',usershcema)
 
 module.exports=user
