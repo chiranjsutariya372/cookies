@@ -1,7 +1,8 @@
 const express = require('express');
-const { home, login, singup, session, loginget, loginpost, homepage, getblog } = require('../controllers/controllers');
+const { home, login, singup, session, loginget, loginpost, homepage, getblog, postblog, blogpage } = require('../controllers/controllers');
 const auth = require('../middleware/middleware');
 const passport = require('passport');
+const isAouth = require('../middleware/isAouth');
 const users = express();
 
 users.get('/',homepage)
@@ -10,8 +11,10 @@ users.get('/session',session)
 users.get('/singup',singup)
 users.post('/login',login)
 users.get('/loginpage',loginget)
-users.post('/loginpost',passport.authenticate('local'),loginpost)
-users.get('/blog',getblog)
+users.post('/loginpost',passport.authenticate('local',{failureRedirect:'/loginpage',successRedirect:'/blog'}))
+users.get('/blog',isAouth,getblog)
+users.post('/blog',postblog)
+users.get('/blogpage',blogpage)
 
 // GoogleAuth
 

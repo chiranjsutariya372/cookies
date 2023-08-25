@@ -16,7 +16,7 @@ const localpassport = (passport) => {
     })
 
     passport.deserializeUser(async(id,done)=>{
-        const Id=await  user.findOne({id})
+        const Id=await  user.findById(id)
         done(null,Id);
     })
 }

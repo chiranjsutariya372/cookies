@@ -40,5 +40,15 @@ const loginpost=async(req,res) => {
 const getblog=(req, res)=>{
     res.render('blog')
 }
+const postblog=async(req, res)=>{
+    req.user.blog.push(req.body)
+    await user.findByIdAndUpdate(req.user.id, req.user)
+    console.log(req.body);
+    res.send('welcome')
+}
+const blogpage=async(req, res)=>{
+    let blogpage=await user.find()
+    res.send(blogpage)
+}
 
-module.exports ={home,login,singup,session,loginget,loginpost,homepage,getblog}
+module.exports ={home,login,singup,session,loginget,loginpost,homepage,getblog,postblog,blogpage}
