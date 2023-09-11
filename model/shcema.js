@@ -4,8 +4,7 @@ const bcrypt= require('bcryptjs');
 let usershcema=mongoose.Schema({
     username:String,
     email:String,
-    password:String,
-    blog:Array
+    password:String
 })
 
 
