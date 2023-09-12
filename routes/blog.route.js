@@ -14,4 +14,9 @@ blogroutes.post('/newblog',async(req,res)=>{
     res.send(createblog)
 })
 
+blogroutes.get('/blogfind',async(req,res)=>{
+    let find=await Blog.find().populate("userId")
+    res.send(find)
+})
+
 module.exports=blogroutes
