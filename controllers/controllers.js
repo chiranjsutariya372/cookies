@@ -1,11 +1,20 @@
 const passport = require("passport")
+const jwt=require("jsonwebtoken")
 const user = require("../model/shcema")
 
 const homepage = (req, res) => {
     res.render('index')
 }
-const home = (req, res) => {
-    res.render('index')
+const home = async(req, res) => { 
+    const {token} = req.cookies;
+    if(token){
+        const decode = jwt.verify(token, "Hellohgifdighidfugydg$%retre%$");
+        req.data = await user.findById(decode._id);
+        res.render('index')
+    }
+    else{
+        res.render(login)
+    }
 }
 const singup = (req, res) => {
     res.render('singup')
@@ -22,19 +31,27 @@ const session = (req, res) => {
 }
 const login = async (req, res) => {
     console.log(req.body);
-    const { username, password } = req.body;
-    // await user.save();            
+    const { username, password } = req.body;        
     await user.create(req.body)
-    res.cookie('token', username)
+    let payload={
+        username:req.body.username,
+        email:req.body.email
+    }
+    let token=jwt.sign(payload,"Key")
+    console.log(token); 
+    res.cookie('token', "Hellohgifdighidfugydg$%retre%$")
     res.render('index')
 
+}
+const jwttoken=(req,res)=>{
+    let decode=jwt.verify(req.body.token,"Key")
+    console.log(decode);
+    res.send(decode)
 }
 const loginget = (req, res) => {
     res.render('login')
 }
 const loginpost = async (req, res) => {
-    // console.log(req.body);
-    // res.render('index')
     res.render('blog')
 }
 const getblog = (req, res) => {
@@ -46,12 +63,5 @@ const postblog = async (req, res) => {
     console.log(req.body);
     res.send('welcome')
 }
-const blogpage = async (req, res) => {
-    const show = await user.find(req.user)
-    res.status(200).json({
-        Blog: (show.map((item) => (req) ? item.blog : ''))
-    })
 
-}
-
-module.exports = { home, login, singup, session, loginget, loginpost, homepage, getblog, postblog, blogpage }
+module.exports = { home, login, singup, session, loginget, loginpost, homepage, getblog, postblog,jwttoken }
