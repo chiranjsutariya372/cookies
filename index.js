@@ -1,15 +1,12 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const server = require('./config/db');
-const users= require('./routes/route')
+const users= require('./routes/route');
 const session = require('express-session');
 const passport = require('passport');
 const localpassport = require('./middleware/middelware.login');
-const googleAuth = require('./middleware/Oauth');
-const routes = require('./routes/product.route');
 const blogroutes = require('./routes/blog.route');
 localpassport(passport)
-googleAuth(passport)
 const app = express();
 
 app.set("view engine","ejs")
@@ -22,7 +19,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
 app.use(users)
-app.use(routes)
 app.use(blogroutes)
 
 

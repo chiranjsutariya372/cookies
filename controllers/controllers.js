@@ -1,6 +1,7 @@
 const passport = require("passport")
 const jwt=require("jsonwebtoken")
 const user = require("../model/shcema")
+const Blog = require("../model/blog.Schema")
 
 const homepage = (req, res) => {
     res.render('index')
@@ -16,18 +17,8 @@ const home = async(req, res) => {
         res.render(login)
     }
 }
-const singup = (req, res) => {
+const signup = (req, res) => {
     res.render('singup')
-}
-const session = (req, res) => {
-    if (req.session.visit) {
-        (req.session.visit++)
-        res.send(`visit ${req.session.visit}`)
-    }
-    else {
-        req.session.visit = 1;
-        res.send(`visit ${req.session.visit}`)
-    }
 }
 const login = async (req, res) => {
     console.log(req.body);
@@ -63,5 +54,19 @@ const postblog = async (req, res) => {
     console.log(req.body);
     res.send('welcome')
 }
+const findblog= async (req, res) => {
+   let all= await Blog.find();
+   res.send(all);
+   console.log(all);
+}
+const edit= async (req, res) => {
+    let edit= await Blog.findByIdAndUpdate(req.params.id, req.body)
+    edit=await Blog.findById(req.params.id)
+    res.send(edit);
+}
+const remove= async (req, res) => {
+    let delet= await Blog.findByIdAndDelete(req.params.id);
+    res.send(delet);
+}
 
-module.exports = { home, login, singup, session, loginget, loginpost, homepage, getblog, postblog,jwttoken }
+module.exports = { home, login, signup, loginget, loginpost, homepage, getblog, postblog,jwttoken,findblog,edit,remove }
